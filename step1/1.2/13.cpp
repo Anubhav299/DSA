@@ -7,18 +7,16 @@ int main()
 
     cout<<"Enter Value of n - ";
     cin>>n;
-    
-    for(i = 1; i <= 5 ; i++)
+
+    for(i=1;i<=n;i++)
     {
-        for(j = 1; j <=i ; j++)
+        for(j=1;j<=i;j++)
         {
-            if(k%2==0)
-            cout<<"0";
-            else
-            cout<<"1";
+            cout<<k<<"  ";
             k++;
         }
         cout<<endl;
     }
+
     return 0;
 }

@@ -2,21 +2,23 @@
 using namespace std;
 
 int main()
-{
-    int n,i,j,k=1;
 
+{
+    int n,i,j,k;
     cout<<"Enter Value of n - ";
     cin>>n;
-
-    for(i=1;i<=n;i++)
+    for(i=n;i>0;i--)
     {
-        for(j=1;j<=i;j++)
+        for(j=0;j<n-i;j++)
         {
-            cout<<k<<"  ";
-            k++;
+            cout<<" ";
+        }
+
+        for(k=((2*i)-1);k>0;k--)
+        {
+            cout<<"*";
         }
         cout<<endl;
     }
-
     return 0;
 }

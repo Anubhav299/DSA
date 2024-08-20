@@ -2,32 +2,24 @@
 using namespace std;
 
 int main()
-{
-    int n,i,j;
 
+{
+    int n,i,j,k;
     cout<<"Enter Value of n - ";
     cin>>n;
-
-    int space=2*(n-1);
-    for(i=1;i<=n;i++)
+    
+    for(i=0;i<n;i++)
     {
-        for(j=1;j<=i;j++)
+        for(j=0;j<n-i-1;j++)
         {
-            cout<<j;
+            cout<<" ";
         }
 
-        for(j=1;j<=space;j++)
+        for(k=0;k<((2*i)+1);k++)
         {
-            cout<<" "; 
-        }
-        
-        for(j=i;j>=1;j--)
-        {
-            cout<<j;
+            cout<<"*";
         }
         cout<<endl;
-        space-=2;
     }
-
     return 0;
 }

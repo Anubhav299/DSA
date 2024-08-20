@@ -4,20 +4,20 @@ using namespace std;
 int main()
 {
     int n,i,j;
-    char k='A';
 
     cout<<"Enter Value of n - ";
     cin>>n;
-
-    for(i=n;i>=1;i--)
+    
+    for(i = 1; i <=(2*n)-1 ; i++)
     {
-        char k='A';
-
-        for(j=1;j<=i;j++)
+        int stars = i;
+        if(i>n) 
+        stars = (2*n)-i;
+        for(j = 1; j<=stars ; j++)
         {
-            cout<<k<<"  ";
-            k++;
+            cout<<"*";
         }
+
         cout<<endl;
     }
 

@@ -9,19 +9,19 @@ int main()
     cin>>n;
 
     int space=2*(n-1);
-    for(i=1;i<=n;i++)
+    for(i=1; i<=n; i++)
     {
-        for(j=1;j<=i;j++)
+        for(j=1; j<=i ;j++)
         {
             cout<<j;
         }
 
-        for(j=1;j<=space;j++)
+        for(j=1; j<=space;j++)
         {
             cout<<" "; 
         }
         
-        for(j=i;j>=1;j--)
+        for(j=i; j>=1; j--)
         {
             cout<<j;
         }

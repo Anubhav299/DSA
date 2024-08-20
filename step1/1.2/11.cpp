@@ -12,10 +12,10 @@ int main()
     {
         for(j = 1; j <=i ; j++)
         {
-            if(k%2==0)
-            cout<<"0";
+            if(k % 2 == 0)
+            cout << "0";
             else
-            cout<<"1";
+            cout << "1";
             k++;
         }
         cout<<endl;

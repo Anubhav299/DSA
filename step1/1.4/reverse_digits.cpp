@@ -5,7 +5,7 @@ int main()
 {
 
     int x;
-    cout<<"Enter X - ";
+    cout<<"Enter X = ";
     cin>>x;
         int c=0;
         int d,n=0;

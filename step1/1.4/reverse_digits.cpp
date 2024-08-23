@@ -7,13 +7,16 @@ int main()
     int x;
     cout<<"Enter X = ";
     cin>>x;
-        int c=0;
-        int d,n=0;
-        while(x!=0)
+        long int rev;
+        int r;
+        while(x)
         {
-            d=x%10;
-            n=n*10+d;
+            r=x%10;
+            rev=rev*10+r;
             x/=10;
         }
-        cout<<n;
+        if(rev<=pow(-2,31)||rev>=(pow(2,31)-1))
+        cout<<0;
+        else 
+        cout<<rev;
     }

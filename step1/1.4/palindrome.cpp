@@ -1,10 +1,8 @@
-#include <bits/stdc++.h>
-using namespace std;
-
-int main()
-{
-
-        int x,r;
+class Solution {
+public:
+    bool isPalindrome(int x) 
+    {
+        int r;
         long int rev=0;
         int n=x;
         if(x<0)
@@ -30,3 +28,4 @@ int main()
             return false;
         }
     }
+};

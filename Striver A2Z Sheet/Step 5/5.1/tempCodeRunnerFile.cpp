@@ -1,0 +1,1 @@
+    cout << isIsomorphic(s, t);

@@ -1,32 +1,68 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void bubblesort(vector <int> &nums)
+int pivotIndex(vector<int> &nums)
 {
     int n = nums.size();
-    int Swap = 0;
+    vector<int> pre(n, 0);
+    vector<int> suf(n, 0);
+    int j = n - 1;
     for (int i = 0; i < n; i++)
     {
-        for (int j = n - 1; j > i; j--)
+        if (i == 0)
         {
-            if(nums[j]<nums[j-1])
-            {
-                Swap = 1;
-                swap(nums[j], nums[j - 1]);
-            }
+            pre[i] = nums[i];
         }
-        if(Swap == 0)
+        else
         {
-            break;
+            pre[i] = pre[i - 1] + nums[i];
         }
+        if (j == n - 1)
+        {
+            suf[j] = nums[j];
+        }
+        else
+        {
+            suf[j] = suf[j + 1] + nums[j];
+        }
+        j--;
     }
 }
 
 int main()
 {
-    vector<int> arr = {4, 7, 2, 5, 1, 3};
-    bubblesort(arr);
-    for(auto it:arr)
+    vector<int> nums = {-1,-1,0,0,-1,-1};
+    // cout << pivotIndex(arr);
+    int n = nums.size();
+    vector<int> pre(n, 0);
+    vector<int> suf(n, 0);
+    int j = n - 1;
+    for (int i = 0; i < n; i++)
+    {
+        if (i == 0)
+        {
+            pre[i] = nums[i];
+        }
+        else
+        {
+            pre[i] = pre[i - 1] + nums[i];
+        }
+        if (j == n - 1)
+        {
+            suf[j] = nums[j];
+        }
+        else
+        {
+            suf[j] = suf[j + 1] + nums[j];
+        }
+        j--;
+    }
+    for(auto it:pre)
+    {
+        cout << it << " ";
+    }
+    cout << endl;
+    for(auto it:suf)
     {
         cout << it << " ";
     }

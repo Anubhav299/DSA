@@ -18,24 +18,24 @@ int main()
     cout << "Enter element to be searched : ";
     cin >> x;
 
-    // ans = upper_bound(arr.begin(),arr.end(),x)-arr.begin();
+    ans = upper_bound(arr.begin(),arr.end(),x)-arr.begin();
 
-    low = 0;
-    high = n - 1;
-    ans = n;
-    while (low <= high)
-    {
-        mid = (low + high) / 2;
-        if (arr[mid] > x)
-        {
-            ans = mid;
-            high = mid - 1;
-        }
-        else
-        {
-            low = mid + 1;
-        }
-    }
+    // l4ow = 0;
+    // high = n - 1;
+    // ans = n;
+    // while (low <= high)
+    // {
+    //     mid = (low + high) / 2;
+    //     if (arr[mid] > x)
+    //     {
+    //         ans = mid;
+    //         high = mid - 1;
+    //     }
+    //     else
+    //     {
+    //         low = mid + 1;
+    //     }
+    // }
 
     cout << "Upper Bound is : " << ans;
 

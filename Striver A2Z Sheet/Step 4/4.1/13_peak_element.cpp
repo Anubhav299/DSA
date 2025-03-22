@@ -40,7 +40,7 @@ int findPeakElement_Optimal(vector<int> &nums)
         }
 
         // if we are in left half
-        if ((nums[mid - 1] < nums[mid]))
+        if (nums[mid - 1] < nums[mid])
         {
             low = mid + 1;
         }

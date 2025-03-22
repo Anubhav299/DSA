@@ -8,11 +8,11 @@ vector<int> nextSmallerElement(vector<int> &nums)
     vector<int> nse(n, 0);
     for (int i = 0; i < n; i++)
     {
-        while(st.empty()!=true && nums[i]<=st.top())
+        while (st.empty() != true && nums[i] <= st.top())
         {
             st.pop();
         }
-        if(st.empty())
+        if (st.empty())
         {
             nse[i] = -1;
         }
@@ -27,7 +27,7 @@ vector<int> nextSmallerElement(vector<int> &nums)
 
 int main()
 {
-    vector<int> n1 = {3,2,1};
+    vector<int> n1 = {3, 2, 1};
     for (auto it : nextSmallerElement(n1))
     {
         cout << it << " ";

@@ -1,59 +1,25 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct node
+int median(vector<vector<int>> &mat)
 {
-    int data;
-    node *left;
-    node *right;
-
-    node(int x)
+    vector<int> ans;
+    int k = 0;
+    for(auto itr:mat)
     {
-        data = x;
-        left = right = NULL;
+        for(auto it: itr)
+        {
+            ans.push_back(it);
+        }
     }
-};
-
-node *insert(node *root, int val)
-{
-    if (root == NULL)
-    {
-        return new node(val);
-    }
-    if (val < root->data)
-    {
-        root->left = insert(root->left, val);
-    }
-    else if (val > root->data)
-    {
-        root->right = insert(root->right, val); // Insert into the right subtree
-    }
-    return root;
-}
-
-void inOrder(node *root)
-{
-    if(root == NULL)
-    {
-        return;
-    }
-
-    inOrder(root->left);
-    cout << root->data << " ";
-    inOrder(root->right);
+    sort(ans.begin(), ans.end());
+    k = (ans.size()) / 2;
+    return ans[k];
 }
 
 int main()
 {
-    node *root = NULL;
-    root = insert(root, 5);
-    root = insert(root, 3);
-    root = insert(root, 2);
-    root = insert(root, 4);
-    root = insert(root, 7);
-    root = insert(root, 6);
-    root = insert(root, 8);
-
-    inOrder(root);
+    vector<vector<int>> arr = {{1}, {2}, {3}};
+    cout << median(arr);
     return 0;
 }

@@ -29,6 +29,7 @@ int findPeakElement_Optimal(vector<int> &nums)
         return 0;
     if (nums[n - 1] > nums[n - 2])
         return n - 1;
+    
     low = 1;
     high = n - 2;
     while (low <= high)
@@ -39,7 +40,7 @@ int findPeakElement_Optimal(vector<int> &nums)
             return mid;
         }
 
-        // if we are in left half
+        // if we are in left half  
         if (nums[mid - 1] < nums[mid])
         {
             low = mid + 1;

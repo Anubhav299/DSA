@@ -15,26 +15,23 @@ vector<int> postorderTraversal(TreeNode *root)
 {
     stack<TreeNode *> st;
     vector<int> postorder;
-    TreeNode *curr = root, *temp = nullptr;
-
+    TreeNode *temp = NULL, *curr = root;
     while (curr != nullptr || !st.empty())
     {
         if (curr != nullptr)
         {
             st.push(curr);
-            curr = curr->left; // Go as left as possible
+            curr = curr->left;                  // reach the left most node
         }
         else
         {
-            temp = st.top()->right; // Check the right subtree
-            if (temp == nullptr)    // If there's no right child, process the node
+            temp = st.top()->right;             //check the right node of the left most node
+            if (temp == nullptr)                //if it doesn't exist, print the nodes
             {
                 temp = st.top();
                 st.pop();
                 postorder.push_back(temp->val);
-
-                // Process the nodes whose right child we have already visited
-                while (!st.empty() && temp == st.top()->right)
+                while (!st.empty() && temp == (st.top()->right))        // done for right skewed pattern
                 {
                     temp = st.top();
                     st.pop();
@@ -43,12 +40,10 @@ vector<int> postorderTraversal(TreeNode *root)
             }
             else
             {
-                // If right child exists, go to the right subtree
                 curr = temp;
             }
         }
     }
-
     return postorder;
 }
 

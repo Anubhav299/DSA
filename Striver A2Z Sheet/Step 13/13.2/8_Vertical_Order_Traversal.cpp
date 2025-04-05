@@ -11,6 +11,13 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+
+/*
+the intuition behind this is so we can create a grid like structure with root as (0,0) as in(row, col)
+and its left child will have (1,-1) while right child is (1,1)
+We use preorder here(but can choose any other traversal to set Row,Column) 
+we take multiset to ensure that entries that are at the same coordinate are sorted and taken care of
+*/
 void setRowColumn(TreeNode *root, int level, int vertical, map<int, map<int, multiset<int>>> &nodes)
 {
     if(root == NULL)
@@ -23,6 +30,12 @@ void setRowColumn(TreeNode *root, int level, int vertical, map<int, map<int, mul
     
 }
 
+/*
+this function takes care of printing the nodes according to the question as we've already stored them in above function onto a map
+Now we only take Vertical Levels and make sure that order is maintained according to the question
+
+See Striver Diagram for map visualisation
+*/
 vector<vector<int>> verticalTraversal(TreeNode *root)
 {
     map<int, map<int, multiset<int>>> nodes;

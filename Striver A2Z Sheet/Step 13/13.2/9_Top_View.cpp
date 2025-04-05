@@ -14,6 +14,10 @@ struct Node
     }
 };
 
+
+/*
+the main intuition is that we start by iterating over every node from the top and check if its the first node in its vertical level, if yes we insert it into a map along with its vertical level, if not we move on
+*/
 vector<int> topView(Node *root)
 {
     vector<int> ans;
@@ -29,17 +33,20 @@ vector<int> topView(Node *root)
         Node *temp = it.first;
         int vertical = it.second;
 
-        if (mpp.find(vertical) == mpp.end())
+        if (mpp.find(vertical) == mpp.end())        //if there isn't an element in vertical level
+                                                    //means that we insert it as it would be in top view
         {
             mpp[vertical] = temp->data;
         }
 
-        if (temp->left != NULL)
+        if (temp->left != NULL)                     // now we go to the left child and check if 
+                                                    //its the first node in its vertical level
         {
             q.push({temp->left, vertical - 1});
         }
 
-        if (temp->right != NULL)
+        if (temp->right != NULL)                    // now we go to the right child and check if 
+                                                    //its the first node in its vertical level
         {
             q.push({temp->right, vertical + 1});
         }

@@ -14,46 +14,27 @@ struct Node
     }
 };
 
+
+
+void setVerticalLevel(Node *root, int vertical, map<int, int> &nodes)
+{
+    if (root == NULL)
+        return;
+    if (nodes.find(vertical) == nodes.end() )
+    {
+        nodes[vertical] = root->data;
+    }
+    setVerticalLevel(root->left, vertical - 1, nodes);
+    setVerticalLevel(root->right, vertical + 1, nodes);
+}
+
 vector<int> topView(Node *root)
 {
-    vector<int> ans;
-    if (root == NULL)
-        return ans;
-    map<int, int> mpp;
-    queue<pair<Node *, int>> q;
-    q.push({root, 0});
-    while (q.empty() != true)
-    {
-        auto it = q.front();
-        q.pop();
-        Node *temp = it.first;
-        int vertical = it.second;
-
-        if (mpp.find(vertical) == mpp.end())
-        {
-            mpp[vertical] = temp->data;
-        }
-
-        if (temp->left != NULL)
-        {
-            q.push({temp->left, vertical - 1});
-        }
-
-        if (temp->right != NULL)
-        {
-            q.push({temp->right, vertical + 1});
-        }
-    }
-    for (auto it : mpp)
-    {
-        ans.push_back(it.second);
-    }
-    return ans;
 }
+
 int main()
 {
-    // map<int, int> nodes;
-    vector<int> ans;
+    map<int, int> nodes;
     Node *root = new Node(1);
     // root->left = new Node(2);
     root->right = new Node(2);
@@ -70,10 +51,10 @@ int main()
     root->right->right->right->left->right->right->left = new Node(13);
     root->right->right->right->left->right->right->right = new Node(14);
 
-    ans = topView(root);
-    for (auto it : ans)
+    setVerticalLevel(root, 0, nodes);
+    for(auto it:nodes)
     {
-        cout << it << endl;
+        cout << it.first << " " << it.second << endl;
     }
     return 0;
 }

@@ -1,2 +1,1 @@
-
-    {
+minSum = nums[i] + nums[i - 1];

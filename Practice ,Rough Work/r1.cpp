@@ -1,64 +1,59 @@
-void findLeaf(Node *root, vector<int> &ans)
+#include <bits/stdc++.h>
+using namespace std;
+
+void display(vector<int> &arr)
 {
-    if (root->left == NULL && root->right == NULL)
+    for (auto it : arr)
     {
-        ans.push_back(root->data);
-        return;
+        cout << it << " ";
     }
-    if(root->left)
-        findLeaf(root->left, ans);
-    if(root->right)
-        findLeaf(root->right, ans);
+    cout << endl;
 }
 
-vector<int> boundaryTraversal(Node *root)
+bool isNonDec(vector<int> &nums)
 {
-    vector<int> ans, rTemp;
-    Node *rightTemp = root->right, *leftTemp = root->left;
-
-    if (root == NULL)
-        return ans;
-        
-    ans.push_back(root->data);
-    
-    if(root->left == NULL && root->right == NULL)   // only one node
-        return ans;
-
-    while (leftTemp != NULL)
+    for (int i = 0; i < nums.size() - 1; i++)
     {
-        if (leftTemp->left || leftTemp->right)
+        if (nums[i] > nums[i + 1])
         {
-            ans.push_back(leftTemp->data);
-        }
-        if (leftTemp->left)
-        {
-            leftTemp = leftTemp->left;
-        }
-        else
-        {
-            leftTemp = leftTemp->right;
+            return false;
         }
     }
+    return true;
+}
 
-    findLeaf(root, ans);
-
-    while (rightTemp != NULL)
+int minimumPairRemoval(vector<int> &nums)
+{
+    int m = nums.size(), minSum, target = -1, ans = 0;
+    if (m == 0 || m == 1 || isNonDec(nums))
+        return 0;
+    while (isNonDec(nums) != true)
     {
-        if (rightTemp->left || rightTemp->right)
+        ans++;
+        minSum = INT_MAX;
+        int n = nums.size();
+        for (int i = n - 1; i > 0; i--)
         {
-            rTemp.push_back(rightTemp->data);
+            if (nums[i] + nums[i - 1] <= minSum)
+            {
+                target = i;
+                minSum = nums[i] + nums[i - 1];
+            }
         }
-        if (rightTemp->right)
-        {
-            rightTemp = rightTemp->right;
-        }
-        else
-        {
-            rightTemp = rightTemp->left;
-        }
+        nums.erase(nums.begin() + target);
+        nums.erase(nums.begin() + target - 1);
+        nums.insert(nums.begin() + target - 1, minSum);
+        display(nums);
     }
-    reverse(rTemp.begin(), rTemp.end());
-    copy(rTemp.begin(), rTemp.end(), std::back_inserter(ans));
     return ans;
 }
-};
+
+int main()
+{
+    vector<int> nums = {2,2,-1,3,-2,2,1,1,1,0,-1};
+    cout << minimumPairRemoval(nums);
+
+    // vector<int> arr = {5, 6, 6};
+    // cout << isNonDec(arr);
+    return 0;
+}

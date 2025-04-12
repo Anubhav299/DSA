@@ -57,7 +57,7 @@ string infixToPostfix(string &s)
 
 int main()
 {
-    string s = "a+b*(c/d)";
+    string s = "a+b*(c/d)       ";
     cout << infixToPostfix(s);
     return 0;
 }

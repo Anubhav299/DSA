@@ -12,6 +12,7 @@ struct TreeNode
 };
 
 //for diameter we find the left subtree height and right subtree height as that would give us the "diameter"
+//diameter is nothing but the sum of (...read more in leetcode)
 int findDiameter(TreeNode *root, int &diameter)
 {
     if (root == NULL)

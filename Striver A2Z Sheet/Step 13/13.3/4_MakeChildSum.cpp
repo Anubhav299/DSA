@@ -15,18 +15,15 @@ void changeTree(TreeNode *root)
 {
     if (root == NULL)
         return;
-    int lval, rval;
+    int lval = 0, rval = 0;
     // left child value calculation
-    if (root->left == NULL)
-        lval = 0;
-    else
+    if (root->left)
         lval = root->left->val;
 
     // right child value calculation
-    if (root->right == NULL)
-        rval = 0;
-    else
+    if (root->right)
         rval = root->right->val;
+
     if (root->val > (lval + rval))
     {
         if (root->left != NULL)
@@ -38,8 +35,11 @@ void changeTree(TreeNode *root)
             root->right->val = root->val;
         }
     }
+    
     changeTree(root->left);
     changeTree(root->right);
+
+    //calculation of root value
     int tot = 0;
     if (root->left)
         tot += root->left->val;

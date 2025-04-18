@@ -12,6 +12,7 @@ struct TreeNode
 };
 
 //striver's approach
+//iterative
 TreeNode *insertIntoBST(TreeNode *root, int val)
 {
     if(root == NULL)

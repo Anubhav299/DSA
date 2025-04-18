@@ -11,11 +11,53 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-/*check register, video and 
-the main intuition behind this is that we keep checking every node and either the node returns a null or p or q node 
+/*check register, video and
+the main intuition behind this is that we keep checking every node and either the node returns a null or p or q node
 so what we end up having is that as we go down in levels we encounter our p and q and where-ever we find p and q combined as in both are returned as not null by a node then that node will be the LCA
 */
+
+// TC : O(log N)
 TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
+{
+    if (root == NULL)
+        return root;
+    int curr = root->val;
+    if (p->val < curr && q->val < curr)
+    {
+        return lowestCommonAncestor(root->left, p, q);
+    }
+
+    if (p->val > curr && q->val > curr)
+    {
+        return lowestCommonAncestor(root->right, p, q);
+    }
+    return root;
+}
+
+// my method
+/*TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
+{
+    if (root == NULL || root == p || root == q)
+        return root;
+
+    if ((p->val <= root->val && q->val >= root->val) || (p->val >= root->val && q->val <= root->val))
+    {
+        return root;
+    }
+
+    if (p->val <= root->val && q->val <= root->val)
+    {
+        return lowestCommonAncestor(root->left, p, q);
+    }
+    else if (p->val >= root->val && q->val >= root->val)
+    {
+        return lowestCommonAncestor(root->right, p, q);
+    }
+    return root;
+}*/
+
+// TC : O(N)
+/*TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
 {
     if (root == NULL || root == p || root == q)
     {
@@ -31,7 +73,7 @@ TreeNode *lowestCommonAncestor(TreeNode *root, TreeNode *p, TreeNode *q)
         return left;
     else
         return root;
-}
+}*/
 
 int main()
 {
@@ -45,7 +87,7 @@ int main()
     root->right->left = new TreeNode(0);
     root->right->right = new TreeNode(8);
 
-    //note here we are giving the pointer to a specific node
+    // note here we are giving the pointer to a specific node
     TreeNode *LCA = root, *p = root->left->right->left, *q = root->left;
     LCA = lowestCommonAncestor(root, p, q);
     cout << LCA->val;

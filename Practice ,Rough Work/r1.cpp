@@ -1,35 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int main()
+int numRabbits(vector<int> &answers)
 {
-    vector<int> arr = {3, 1, 2, 2, 2, 1, 3};
-    unordered_map<int, int> hash;
-    int n = arr.size(), k = 2, cnt = 0;
-    for (int i = 0; i < n; i++)
+    int ans = 0, cnt = 0;
+    unordered_map<int, int> mpp;
+    for (auto it : answers)
     {
-        if(hash.find(arr[i]) == hash.end())
+        mpp[it]++;
+    }
+    for (auto it : mpp)
+    {
+        if (it.first == 0)
         {
-            if (i % k == 0)
-            {
-                hash.insert({arr[i], i});
-            }
+            ans += it.second;
         }
         else
         {
-            ++cnt;  
-            if(i % k == 0)
-            {
-                hash[arr[i]] = i;
-            }
+            int grp = it.first + 1;
+            ans += ((grp)*(ceil((float)it.second/(grp))));
         }
     }
+    return ans;
+}
 
-    for(auto it:hash)
-    {
-        cout << it.first << " " << it.second << endl;
-    }
-    cout << endl;
-    cout << cnt;
+int main()
+{
+    vector<int> arr = {};
+    cout << numRabbits(arr);
     return 0;
 }

@@ -25,7 +25,7 @@ vector<int> inorderTraversal(TreeNode *root)
         if(node != NULL)
         {
             st.push(node);
-            node = node->left;
+            node = node->left;          // reach the left most node
         }
         else
         {
@@ -34,7 +34,7 @@ vector<int> inorderTraversal(TreeNode *root)
             node = st.top();
             st.pop();
             inorder.push_back(node->val);
-            node = node->right;
+            node = node->right;         //move to the right child
         }
     }
     return inorder;

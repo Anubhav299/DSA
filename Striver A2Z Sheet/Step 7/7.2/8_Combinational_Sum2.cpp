@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+ #include <bits/stdc++.h>
 using namespace std;
 
 void solve(int ind, vector<int> &candidates, int target, vector<int> &arr, vector<vector<int>> &ans)

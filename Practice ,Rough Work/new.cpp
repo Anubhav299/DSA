@@ -1,79 +1,42 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct Node
-{
-    int data;
-    Node *left;
-    Node *right;
+const int mod = 1000000007;
 
-    Node(int val)
+class Solution
+{
+public:
+    int lengthAfterTransformations(string s, int t)
     {
-        data = val;
-        left = right = NULL;
+        int ans = 0, cnt = 0;
+        vector<int> hash(26, 0);
+        for (char c : s)
+        {
+            hash[c - 'a']++;
+        }
+        cnt = t / 26;
+        t = t % 26;
+        ans = cnt ? s.length() * (cnt + 1) : s.length();
+
+        cnt = 0;
+        // int i = 25;
+        // while (t)
+        // {
+        //     cnt += hash[i];
+        //     i--;
+        //     t--;
+        // }
+        for (int i = 25; i > 25 - t; i--)
+        {
+            cnt = cnt + (hash[i]);
+        }
+        ans += cnt;
+        return ans % mod;
     }
 };
 
-vector<int> topView(Node *root)
-{
-    vector<int> ans;
-    if (root == NULL)
-        return ans;
-    map<int, int> mpp;
-    queue<pair<Node *, int>> q;
-    q.push({root, 0});
-    while (q.empty() != true)
-    {
-        auto it = q.front();
-        q.pop();
-        Node *temp = it.first;
-        int vertical = it.second;
-
-        if (mpp.find(vertical) == mpp.end())
-        {
-            mpp[vertical] = temp->data;
-        }
-
-        if (temp->left != NULL)
-        {
-            q.push({temp->left, vertical - 1});
-        }
-
-        if (temp->right != NULL)
-        {
-            q.push({temp->right, vertical + 1});
-        }
-    }
-    for (auto it : mpp)
-    {
-        ans.push_back(it.second);
-    }
-    return ans;
-}
 int main()
 {
-    // map<int, int> nodes;
-    vector<int> ans;
-    Node *root = new Node(1);
-    // root->left = new Node(2);
-    root->right = new Node(2);
-    root->right->left = new Node(3);
-    root->right->right = new Node(4);
-    root->right->right->left = new Node(5);
-    root->right->right->right = new Node(6);
-    root->right->right->right->left = new Node(7);
-    root->right->right->right->right = new Node(8);
-    root->right->right->right->left->left = new Node(9);
-    root->right->right->right->left->right = new Node(10);
-    root->right->right->right->left->right->left = new Node(11);
-    root->right->right->right->left->right->right = new Node(12);
-    root->right->right->right->left->right->right->left = new Node(13);
-    root->right->right->right->left->right->right->right = new Node(14);
 
-    ans = topView(root);
-    for (auto it : ans)
-    {
-        cout << it << endl;
-    }
     return 0;
 }

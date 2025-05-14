@@ -11,26 +11,76 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
-TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) 
+class BSTIterator
 {
-    if(root == NULL || root == p || root == q)
-        return root;
-
-    if((p->val <= root->val && q->val >= root->val) || (p->val >= root->val && q->val <= root->val))
+    stack<TreeNode *> st;
+    bool rev;
+    void pushAll(TreeNode *node)
     {
-        return root;
+        for (; node != NULL;)
+        {
+            st.push(node);
+            if (rev == true)
+                node = node->right;
+            else
+                node = node->left;
+        }
     }
 
-    if(p->val <= root->val && q->val <= root->val)
+public:
+    BSTIterator(TreeNode *root, bool r)
     {
-        lowestCommonAncestor(root->left, p, q);
+        pushAll(root);
+        rev = r;
     }
-    else if(p->val >= root->val && q->val >= root->val)
+
+    int next()
     {
-        lowestCommonAncestor(root->right, p, q);
+        TreeNode *topNode = st.top();
+        st.pop();
+        if (rev == true)
+        {
+            pushAll(topNode->left);
+        }
+        else
+        {
+            pushAll(topNode->right);
+        }
+        return topNode->val;
     }
-    return root;
-}
+};
+
+class Solution
+{
+public:
+    bool findTarget(TreeNode *root, int k)
+    {
+        if (!root)
+            return false;
+        BSTIterator l(root, false);
+        BSTIterator r(root, true);
+
+        int i = l.next();
+        int j = r.next();
+
+        while (i < j)
+        {
+            if (i + j > k)
+            {
+                j = r.next();
+            }
+            else if (i + j < k)
+            {
+                i = l.next();
+            }
+            else
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+};
 
 int main()
 {

@@ -3,7 +3,7 @@ using namespace std;
 
 vector<int> replaceWithRank(vector<int> &arr, int N)
 {
-    vector<int> ranks(N,0);
+    vector<int> ranks(N, 0);
     priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
     for (int i = 0; i < arr.size(); i++)
     {
@@ -11,19 +11,19 @@ vector<int> replaceWithRank(vector<int> &arr, int N)
     }
 
     int value, rank = 0, prev = INT_MIN, index;
-    while(pq.empty() != true)
+    while (pq.empty() != true)
     {
         value = pq.top().first;
         index = pq.top().second;
 
-        if(value != prev)
+        if (value != prev)
         {
             ++rank;
         }
         ranks[index] = rank;
         prev = value;
         pq.pop();
-    }    
+    }
 
     return ranks;
 }

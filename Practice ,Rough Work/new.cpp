@@ -3,30 +3,38 @@ using namespace std;
 
 vector<vector<int>> subsets(vector<int> &nums)
 {
-    int j = 0, size, n = nums.size();
-    size = n;
-    int row = (1 << n) - 1;
-    vector<vector<int>> ans;
-    while (j <= row)
+    int numElements = nums.size();                       // Number of elements in the input array
+    int totalCombinations = (1 << numElements) - 1;      // Total number of combinations (2^n - 1)
+
+    vector<vector<int>> allSubsets;                      // Result vector to store all subsets
+    int curr = 0;                                        // This will iterate through all bitmasks
+
+    while (curr <= totalCombinations)
     {
-        int i = 0;
-        int bit = 1;
-        vector<int> arr;
-        while (i < n)
+        int index = 0;                                   // Index to iterate through nums
+        int bitMask = 1;                                 // Bitmask to check each bit
+        vector<int>
+            currentSubset;                               // Temporary vector to hold current subset
+
+        while (index < numElements)
         {
-            int temp = j & bit;
-            if (temp)
+            // If the bit at position 'index' is set in curr, include nums[index]
+            if (curr & bitMask)
             {
-                arr.push_back(nums[i]);
+                currentSubset.push_back(nums[index]);
             }
-            bit = bit << 1;
-            i++;
+
+            bitMask = bitMask << 1;                       // Shift bitMask to check next bit
+            index++;
         }
-        ans.push_back(arr);
-        j++;
+
+        allSubsets.push_back(currentSubset);              // Add the formed subset to the result
+        curr++;                                           // Move to the next bitmask
     }
-    return ans;
+
+    return allSubsets;
 }
+
 
 int main()
 {

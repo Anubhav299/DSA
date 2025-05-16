@@ -30,14 +30,6 @@ vector<vector<int>> subsets(vector<int> &nums)
 
 int main()
 {
-    vector<int> nums = {1, 2, 3};
-    for (auto itr : subsets(nums))
-    {
-        for (auto it : itr)
-        {
-            cout << it << " ";
-        }
-        cout << endl;
-    }
+
     return 0;
 }

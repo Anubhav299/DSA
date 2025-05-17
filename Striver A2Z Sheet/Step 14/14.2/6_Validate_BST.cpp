@@ -11,6 +11,10 @@ struct TreeNode
     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+
+/*
+Intuition is that value of a root will always stay in within a confined range if it is a BST
+*/
 void checkBST(TreeNode *root, long leftRange, long rightRange, bool &check)
 {
     if (root == NULL)

@@ -1,89 +1,55 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct TreeNode
+struct Node
 {
-    int val;
-    TreeNode *left;
-    TreeNode *right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-};
+    int data;
+    Node *left;
+    Node *right;
 
-class BSTIterator
-{
-    stack<TreeNode *> st;
-    bool rev;
-    void pushAll(TreeNode *node)
+    Node(int val)
     {
-        for (; node != NULL;)
-        {
-            st.push(node);
-            if (rev == true)
-                node = node->right;
-            else
-                node = node->left;
-        }
-    }
-
-public:
-    BSTIterator(TreeNode *root, bool r)
-    {
-        pushAll(root);
-        rev = r;
-    }
-
-    int next()
-    {
-        TreeNode *topNode = st.top();
-        st.pop();
-        if (rev == true)
-        {
-            pushAll(topNode->left);
-        }
-        else
-        {
-            pushAll(topNode->right);
-        }
-        return topNode->val;
+        data = val;
+        left = right = NULL;
     }
 };
 
-class Solution
+class NodeVal
 {
-public:
-    bool findTarget(TreeNode *root, int k)
+    public:
+        int maxNode, minNode, maxSize;
+    NodeVal(int minNode, int maxNode, int maxSize)
     {
-        if (!root)
-            return false;
-        BSTIterator l(root, false);
-        BSTIterator r(root, true);
-
-        int i = l.next();
-        int j = r.next();
-
-        while (i < j)
-        {
-            if (i + j > k)
-            {
-                j = r.next();
-            }
-            else if (i + j < k)
-            {
-                i = l.next();
-            }
-            else
-            {
-                return true;
-            }
-        }
-        return false;
+        this->maxNode = maxNode;
+        this->minNode = minNode;
+        this->maxSize = maxSize;
     }
 };
+
+NodeVal largestBSTHelper(Node *root)
+{
+    //Empty tree is a BST of size 0
+    if(root == NULL)
+        return NodeVal(INT_MIN, INT_MAX, 0);
+
+    //Getting the values from left and right subtree of current tree
+    auto left = largestBSTHelper(root->left);
+    auto right = largestBSTHelper(root->right);
+
+    //Current node is greater than max in left and smaller than min in right, then it is a BST
+    if(left.maxNode < root->data && root->data < right.minNode)
+    {
+        return NodeVal(min(left.minNode, root->data), max(right.maxNode, root->data), 1 + left.maxSize + right.maxSize);
+    }
+    //otherwise return [-inf, inf] so that the parent can't be a BST
+    return NodeVal(INT_MIN, INT_MAX, max(left.maxSize, right.maxSize));
+}
+
+int largestBst(Node *root)
+{
+    return largestBSTHelper(root).maxSize;
+}
 
 int main()
 {
-
-    return 0;
 }

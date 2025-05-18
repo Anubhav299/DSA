@@ -1,9 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 /*
-Intuition : 
+Intuition : We sort the tasks by frequency by storing them in MaxHeap
+then we execute the highest frequency task first and go till the cooldown 'n' is exhausted 
+(in this time(loop) we try to fit other tasks if possible), once the cooldown is reached, again the first task is executed and this continues till the MaxHeap gets empty
 */
 int leastInterval(vector<char> &tasks, int n)
 {
@@ -29,16 +30,18 @@ int leastInterval(vector<char> &tasks, int n)
     {
         vector<int> tempFreq;
 
+        //for 
         for (int i = 1; i <= n + 1; i++)
         {
             if (sortedFreq.empty() != true)
             {
-                int freq = sortedFreq.top();
+                int freq = sortedFreq.top();                //getting the task with the highest frequency
                 sortedFreq.pop();
                 freq--;
-                tempFreq.push_back(freq);
+                tempFreq.push_back(freq);               //storing it somewhere so that can be pushed later
             }
         }
+
 
         for (auto f : tempFreq)
         {

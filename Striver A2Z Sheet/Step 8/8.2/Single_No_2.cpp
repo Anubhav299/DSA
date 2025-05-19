@@ -1,8 +1,21 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Optimal Method
+// Cannot be known beforehand
+int singleNumber(vector<int> &nums)
+{
+    int ones = 0, twos = 0;
+    for (auto it : nums)
+    {
+        ones = (ones ^ it) & (~twos);
+        twos = (twos ^ it) & (~ones);
+    }
+    return ones;
+}
+
 // Better Method with TC : O(n*log n + n/3)
-//here we sort the array 
+// here we sort the array
 int singleNumber(vector<int> &nums)
 {
     int n = nums.size();
@@ -21,7 +34,7 @@ int singleNumber(vector<int> &nums)
 int singleNumber(vector<int> &nums)
 {
     int cnt, ans = 0;
-    for (int i = 0; i <= 31; i++)           //checking each bit that could be
+    for (int i = 0; i <= 31; i++) // checking each bit that could be
     {
         cnt = 0;
         for (auto it : nums)

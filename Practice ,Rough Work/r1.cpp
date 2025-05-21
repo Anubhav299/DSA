@@ -1,18 +1,30 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-
 int main()
 {
-    int n = 6;
-    int prev2 = 0, prev1 = 1, curr = 0;
-    for (int i = 2; i <= n; i++)
+    vector<int> result;
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
+    int k = 2;
+
+    minHeap.push({4, 1});
+    minHeap.push({3, 2});
+    minHeap.push({3, 4});
+
+    if (minHeap.size() > k)
     {
-        curr = prev1 + prev2;
-        prev2 = prev1;
-        prev1 = curr;
+        minHeap.pop();
     }
 
-    cout << prev1;
+    for (int i = 0; i < k; i++)
+    {
+        result.push_back(minHeap.top().second);
+        minHeap.pop();
+    }
+
+    for(auto it:result)
+    {
+        cout << it << " ";
+    }
     return 0;
 }
